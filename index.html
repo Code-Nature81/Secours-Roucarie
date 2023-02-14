@@ -1,84 +1,909 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carmaux Quiz</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<title>Localisation</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="stylesheet" href="style.css">
     <!-- FontAweome CDN Link for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
 </head>
-
-
-
 <body>
-    <!-- start Quiz button -->
-    <div class="start_btn"><button class="restart">Commencer le Quiz</button></div>
 
-    <!-- Info Box -->
-     <div class="info_box">
-        <div class="info-title"><span>Quelques règles du Quiz</span></div>
-         <div class="info-list">
-            <div class="info">1. Vous n'aurez que <span>15 secondes</span> pour chaque question.</div>
-            <div class="info">2. Une fois que vous avez sélectionné votre réponse, elle ne peut pas être annulée.</div>
-    
-        </div>
-        <div class="buttons">
-            <button class="quit">Sortir</button>
-            <button class="restart">Continuer</button>
-        </div>
+	
+<div id="map"></div>
+
+
+<div class="start_btn"><button class="restart">Carte Secours<br>Cliquez ici</button></div> 
+
+<!-- Info Box -->
+ <div class="info_box">
+    <div class="info-title"><span>Carte Secours</span></div>
+     <div class="info-list">
+        <div class="info">1. Géolocalisez-vous afin de voir ou vous vous situez sur la carte<br><br></div>
+        <div class="info">2. Cliquez sur le pop-up ( balise ) le plus proche de votre position.<br><br></div>
+        <div class="info">3. Appellez directement les secours en indiquand le nom du circuit ainsi que le numéro de la balise.<br><br></div>
+
     </div>
-
-    <!-- Quiz Box -->
-    <div class="quiz_box">
-        <header>
-            <div class="title">Carmaux Quiz </div>
-            <div class="timer">
-                <div class="time_left_txt">Temps</div>
-                <div class="timer_sec">15</div>
-            </div>
-            <div class="time_line"></div>
-        </header>
-        <section>
-            <div class="que_text">
-                <!-- Here I've inserted question from JavaScript -->
-            </div>
-            <div class="option_list">
-                <!-- Here I've inserted options from JavaScript -->
-            </div>
-        </section>
-
-        <!-- footer of Quiz Box -->
-        <footer>
-            <div class="total_que">
-                <!-- Here I've inserted Question Count Number from JavaScript -->
-            </div>
-            <button class="next_btn">Suivant</button>
-        </footer>
+    <div class="buttons">
+       <!-- <button class="quit">Sortir</button> -->
+        <button><a class="restart" href="https://code-nature81.github.io/Secours-Carte-Roucarie/" style="text-decoration: none; color: rgb(254, 2, 2);">Continuez</a></button>
     </div>
+ </div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiZ3ViaW5xIiwiYSI6ImNrbnlubnVwYjBsMjgyb3J4b3hqM2YwOGsifQ.KV-VZe4nIEMc7rhtHmM5BQ';
+var map = new mapboxgl.Map({
+container: 'map', // container id
+style: 'mapbox://styles/mapbox/streets-v11',
+center: [2.142752, 44.082275], // starting position  
+            
+zoom: 13.5 // starting zoom
+});
 
-    <!-- Result Box -->
-    <div class="result_box">
-        <div class="icon">
-            <i class="fas fa-crown"></i>
-        </div>
-        <div class="complete_text">Vous avez terminé le Quiz!</div>
-        <div class="score_text">
-            <!-- Here I've inserted Score Result from JavaScript -->
-        </div>
-        <div class="buttons">
-            <button class="restart">Rejouer</button>
-            <button class="quit">Quitter</button>
-        </div>
-    </div>
 
-    <!-- Inside this JavaScript file I've inserted Questions and Options only -->
-    <!-- <script src="js/questions.js"></script> -->
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.15318, 44.08052])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 1 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.15318 / Lat:44.08052<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
 
-    <!-- Inside this JavaScript file I've coded all Quiz Codes -->
-    <!-- <script src="js/script.js"></script> -->
-    <script src="question.js"></script>
-    <script src="script.js"></script>
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.14714, 44.08031])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 2 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.14714 / Lat:44.08031<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.1416, 44.0814])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 3 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.1416 / Lat:44.0814<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.1358, 44.0819])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 4 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.1358 / Lat:44.0819<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.13102, 44.08138])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 5 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.13102 / Lat:44.08138<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.12920, 44.08424])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 6 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.12920 / Lat:44.08424<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.13422, 44.08454])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 7 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.13422 / Lat:44.08454<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.13940, 44.08547])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 8 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.13940 / Lat:44.08547<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.14373, 44.08316])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 9 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.14373 / Lat:44.08316<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.14812, 44.08393])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 10 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.14812 / Lat:44.08393<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.15210, 44.08206])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 11 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.15210 / Lat:44.08206<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.15800, 44.08234])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 12 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.15800 / Lat:44.08234<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+var marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0, })
+.setLngLat([2.16065, 44.08030])
+.setPopup(new mapboxgl.Popup().setHTML("<h1>Balise 13 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src='https://api.iconify.design/iconoir:pharmacy-cross-circle.svg?color=%23e60000'width='38'></h1><hr><h2>La Roucarié</h2><hr><br><h3>Long:2.16065 / Lat:44.08030<br><br></h3><a href='tel:+33643720271'><h2><img src='phone.svg' width='17;'>&nbsp Appel secours</a></h2>"))
+.addTo(map)
+
+map.on('load', function () {
+map.addSource('route', {
+'type': 'geojson',
+'data': {
+'type': 'Feature',
+'properties': {},
+'geometry': {
+'type': 'LineString',
+'coordinates': [
+[
+2.159194,
+            44.079647
+          ],
+          [
+            2.158792,
+            44.079682
+          ],
+          [
+            2.158422,
+            44.079689
+          ],
+          [
+            2.15802,
+            44.079686
+          ],
+          [
+            2.157794,
+            44.079674
+          ],
+          [
+            2.157236,
+            44.079608
+          ],
+          [
+            2.155981,
+            44.079701
+          ],
+          [
+            2.154297,
+            44.080314
+          ],
+          [
+            2.153755,
+            44.080375
+          ],
+          [
+            2.153406,
+            44.080425
+          ],
+          [
+            2.153272,
+            44.08046
+          ],
+          [
+            2.152977,
+            44.080572
+          ],
+          [
+            2.152757,
+            44.080637
+          ],
+          [
+            2.151802,
+            44.080734
+          ],
+          [
+            2.151534,
+            44.08073
+          ],
+          [
+            2.150617,
+            44.080668
+          ],
+          [
+            2.14949,
+            44.080549
+          ],
+          [
+            2.148975,
+            44.080433
+          ],
+          [
+            2.14882,
+            44.080364
+          ],
+          [
+            2.147409,
+            44.08024
+          ],
+          [
+            2.146776,
+            44.080418
+          ],
+          [
+            2.146314,
+            44.080657
+          ],
+          [
+            2.145832,
+            44.080822
+          ],
+          [
+            2.145317,
+            44.080957
+          ],
+          [
+            2.144807,
+            44.081088
+          ],
+          [
+            2.144533,
+            44.081246
+          ],
+          [
+            2.144163,
+            44.081235
+          ],
+          [
+            2.143836,
+            44.08115
+          ],
+          [
+            2.143487,
+            44.081096
+          ],
+          [
+            2.142994,
+            44.080919
+          ],
+          [
+            2.14272,
+            44.080838
+          ],
+          [
+            2.142484,
+            44.0812
+          ],
+          [
+            2.141728,
+            44.081404
+          ],
+          [
+            2.140521,
+            44.0813
+          ],
+          [
+            2.138595,
+            44.081481
+          ],
+          [
+            2.138337,
+            44.081447
+          ],
+          [
+            2.137576,
+            44.081597
+          ],
+          [
+            2.137109,
+            44.081555
+          ],
+          [
+            2.136889,
+            44.081589
+          ],
+          [
+            2.136015,
+            44.081836
+          ],
+          [
+            2.135355,
+            44.081967
+          ],
+          [
+            2.134566,
+            44.082017
+          ],
+          [
+            2.13425,
+            44.081978
+          ],
+          [
+            2.134057,
+            44.081813
+          ],
+          [
+            2.133847,
+            44.081323
+          ],
+          [
+            2.133767,
+            44.081327
+          ],
+          [
+            2.133654,
+            44.081366
+          ],
+          [
+            2.133483,
+            44.081558
+          ],
+          [
+            2.133332,
+            44.081767
+          ],
+          [
+            2.132995,
+            44.082013
+          ],
+          [
+            2.132742,
+            44.082056
+          ],
+          [
+            2.132362,
+            44.082075
+          ],
+          [
+            2.132083,
+            44.082021
+          ],
+          [
+            2.131675,
+            44.081851
+          ],
+          [
+            2.131165,
+            44.08152
+          ],
+          [
+            2.130854,
+            44.081235
+          ],
+          [
+            2.130752,
+            44.081231
+          ],
+          [
+            2.130613,
+            44.081266
+          ],
+          [
+            2.130575,
+            44.081466
+          ],
+          [
+            2.130876,
+            44.081978
+          ],
+          [
+            2.131192,
+            44.082372
+          ],
+          [
+            2.131412,
+            44.082626
+          ],
+          [
+            2.131412,
+            44.082695
+          ],
+          [
+            2.131149,
+            44.082845
+          ],
+          [
+            2.130731,
+            44.083015
+          ],
+          [
+            2.130473,
+            44.083034
+          ],
+          [
+            2.129996,
+            44.08305
+          ],
+          [
+            2.129749,
+            44.083223
+          ],
+          [
+            2.129803,
+            44.083404
+          ],
+          [
+            2.129781,
+            44.083628
+          ],
+          [
+            2.12969,
+            44.083801
+          ],
+          [
+            2.129492,
+            44.083951
+          ],
+          [
+            2.129288,
+            44.084032
+          ],
+          [
+            2.129089,
+            44.084125
+          ],
+          [
+            2.12925,
+            44.08426
+          ],
+          [
+            2.129433,
+            44.084445
+          ],
+          [
+            2.129653,
+            44.084549
+          ],
+          [
+            2.129889,
+            44.084595
+          ],
+          [
+            2.130055,
+            44.084603
+          ],
+          [
+            2.130253,
+            44.084699
+          ],
+          [
+            2.131112,
+            44.084606
+          ],
+          [
+            2.13168,
+            44.084352
+          ],
+          [
+            2.131857,
+            44.084283
+          ],
+          [
+            2.132024,
+            44.084287
+          ],
+          [
+            2.132131,
+            44.084337
+          ],
+          [
+            2.132131,
+            44.084526
+          ],
+          [
+            2.132179,
+            44.084711
+          ],
+          [
+            2.132249,
+            44.084834
+          ],
+          [
+            2.132544,
+            44.084953
+          ],
+          [
+            2.132737,
+            44.084919
+          ],
+          [
+            2.132823,
+            44.084803
+          ],
+          [
+            2.132801,
+            44.084583
+          ],
+          [
+            2.13286,
+            44.084414
+          ],
+          [
+            2.132957,
+            44.084302
+          ],
+          [
+            2.133161,
+            44.084271
+          ],
+          [
+            2.133569,
+            44.084294
+          ],
+          [
+            2.13462,
+            44.08466
+          ],
+          [
+            2.135146,
+            44.084668
+          ],
+          [
+            2.135795,
+            44.084603
+          ],
+          [
+            2.136031,
+            44.084622
+          ],
+          [
+            2.136304,
+            44.084726
+          ],
+          [
+            2.136535,
+            44.084737
+          ],
+          [
+            2.136873,
+            44.084626
+          ],
+          [
+            2.137136,
+            44.084618
+          ],
+          [
+            2.137447,
+            44.084703
+          ],
+          [
+            2.137737,
+            44.084714
+          ],
+          [
+            2.138053,
+            44.084676
+          ],
+          [
+            2.138327,
+            44.084676
+          ],
+          [
+            2.138488,
+            44.084726
+          ],
+          [
+            2.138788,
+            44.085262
+          ],
+          [
+            2.138879,
+            44.085389
+          ],
+          [
+            2.139046,
+            44.085535
+          ],
+          [
+            2.139271,
+            44.085566
+          ],
+          [
+            2.139378,
+            44.085543
+          ],
+          [
+            2.139432,
+            44.085335
+          ],
+          [
+            2.139373,
+            44.084464
+          ],
+          [
+            2.139453,
+            44.084298
+          ],
+          [
+            2.139603,
+            44.084221
+          ],
+          [
+            2.139984,
+            44.084048
+          ],
+          [
+            2.140285,
+            44.083948
+          ],
+          [
+            2.140762,
+            44.083844
+          ],
+          [
+            2.141277,
+            44.083763
+          ],
+          [
+            2.142479,
+            44.083358
+          ],
+          [
+            2.14272,
+            44.083385
+          ],
+          [
+            2.143042,
+            44.083474
+          ],
+          [
+            2.143273,
+            44.08337
+          ],
+          [
+            2.143487,
+            44.083215
+          ],
+          [
+            2.143745,
+            44.083154
+          ],
+          [
+            2.144571,
+            44.083115
+          ],
+          [
+            2.144914,
+            44.083158
+          ],
+          [
+            2.145451,
+            44.083057
+          ],
+          [
+            2.147285,
+            44.082383
+          ],
+          [
+            2.147527,
+            44.082418
+          ],
+          [
+            2.147672,
+            44.082491
+          ],
+          [
+            2.147757,
+            44.082946
+          ],
+          [
+            2.147924,
+            44.083188
+          ],
+          [
+            2.148079,
+            44.083813
+          ],
+          [
+            2.148128,
+            44.08399
+          ],
+          [
+            2.148262,
+            44.084075
+          ],
+          [
+            2.148449,
+            44.08409
+          ],
+          [
+            2.148589,
+            44.084021
+          ],
+          [
+            2.148632,
+            44.083701
+          ],
+          [
+            2.148938,
+            44.083111
+          ],
+          [
+            2.149007,
+            44.082792
+          ],
+          [
+            2.149002,
+            44.082387
+          ],
+          [
+            2.149093,
+            44.082291
+          ],
+          [
+            2.149222,
+            44.082256
+          ],
+          [
+            2.149426,
+            44.08231
+          ],
+          [
+            2.149715,
+            44.082337
+          ],
+          [
+            2.150145,
+            44.082233
+          ],
+          [
+            2.150622,
+            44.082082
+          ],
+          [
+            2.150987,
+            44.081955
+          ],
+          [
+            2.151523,
+            44.081959
+          ],
+          [
+            2.152065,
+            44.082052
+          ],
+          [
+            2.15243,
+            44.082082
+          ],
+          [
+            2.153229,
+            44.081936
+          ],
+          [
+            2.153921,
+            44.081878
+          ],
+          [
+            2.154978,
+            44.081597
+          ],
+          [
+            2.155133,
+            44.081578
+          ],
+          [
+            2.156233,
+            44.081605
+          ],
+          [
+            2.157424,
+            44.081951
+          ],
+          [
+            2.15758,
+            44.082082
+          ],
+          [
+            2.157816,
+            44.082325
+          ],
+          [
+            2.158261,
+            44.082325
+          ],
+          [
+            2.158288,
+            44.082237
+          ],
+          [
+            2.158202,
+            44.082048
+          ],
+          [
+            2.158223,
+            44.081913
+          ],
+          [
+            2.158331,
+            44.08189
+          ],
+          [
+            2.158567,
+            44.08194
+          ],
+          [
+            2.159634,
+            44.081959
+          ],
+          [
+            2.159961,
+            44.081955
+          ],
+          [
+            2.160412,
+            44.081901
+          ],
+          [
+            2.160578,
+            44.081832
+          ],
+          [
+            2.161254,
+            44.081701
+          ],
+          [
+            2.161351,
+            44.080587
+          ],
+          [
+            2.160922,
+            44.080406
+          ],
+          [
+            2.160289,
+            44.080167
+          ],
+          [
+            2.159833,
+            44.08004
+          ],
+          [
+            2.159629,
+            44.079994
+          ],
+          [
+            2.15928,
+            44.079936
+          ],
+          [
+            2.159243,
+            44.079805
+          ],
+          [
+            2.159269,
+            44.079728
+          ],
+          [
+            2.159253,
+            44.079674
+          ],
+          [
+            2.159184,
+            44.079651
+          ]
+]
+}
+}
+});
+map.addLayer({
+'id': 'route',
+'type': 'line',
+'source': 'route',
+'layout': {
+'line-join': 'round',
+'line-cap': 'round'
+},
+'paint': {
+'line-color': 'red',
+'line-width': 4
+}
+});
+});
+// Add geolocate control to the map.
+map.addControl(
+new mapboxgl.GeolocateControl({
+positionOptions: {
+enableHighAccuracy: true
+},
+trackUserLocation: true
+})
+);
+
+map.addControl(new mapboxgl.NavigationControl());7
+
+
+map.addLayer({
+'id': 'routt',
+'type': 'line',
+'source': 'routt',
+'layout': {
+'line-join': 'round',
+'line-cap': 'round'
+},
+'paint': {
+'line-color': '#CC0000',
+'line-width': 10
+}
+});
+ 
+
+</script>
+<script src="script.js"></script>
 </body>
 </html>
-
