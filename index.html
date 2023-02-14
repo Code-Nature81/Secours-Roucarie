@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <title>Localisation</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="stylesheet" href="style.css">
+    <!-- FontAweome CDN Link for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
 <style>
@@ -12,8 +15,27 @@ body { margin: 0; padding: 0; }
 </style>
 </head>
 <body>
+
 	
 <div id="map"></div>
+
+
+<div class="start_btn"><button class="restart">Carte Secours</button></div> 
+
+<!-- Info Box -->
+ <div class="info_box">
+    <div class="info-title"><span>Carte Secours</span></div>
+     <div class="info-list">
+        <div class="info">1. Géolocalisez-vous afin de voir ou vous vous situez sur la carte<br><br></div>
+        <div class="info">2. Cliquez sur le pop-up ( balise ) le plus proche de votre position.<br><br></div>
+        <div class="info">3. Appllez directement les secours en indiquand le nom du circuit ainsi que le numéro de la balise.<br><br></div>
+
+    </div>
+    <div class="buttons">
+       <!-- <button class="quit">Sortir</button> -->
+        <button><a class="restart" href="https://code-nature81.github.io/Secours-Roucarie/" style="text-decoration: none; color: rgb(254, 2, 2);">Continuez</a></button>
+    </div>
+ </div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3ViaW5xIiwiYSI6ImNrbnlubnVwYjBsMjgyb3J4b3hqM2YwOGsifQ.KV-VZe4nIEMc7rhtHmM5BQ';
 var map = new mapboxgl.Map({
@@ -21,7 +43,7 @@ container: 'map', // container id
 style: 'mapbox://styles/mapbox/streets-v11',
 center: [2.142752, 44.082275], // starting position  
             
-zoom: 14 // starting zoom
+zoom: 13.5 // starting zoom
 });
 
 
@@ -882,6 +904,6 @@ map.addLayer({
  
 
 </script>
- 
+<script src="script.js"></script>
 </body>
 </html>
